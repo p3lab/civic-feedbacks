@@ -25,6 +25,6 @@ Dataset: [link TK from editorial team]
 5. Output files 
 * Figure 1 ([Figure_1.pdf](https://github.com/p3lab/civic-feedbacks/blob/main/output/Figure_1.pdf)): relatoinships between participation, organizational strategy, and policy
  
-* Figure 2a ([Figure_2a.pdf](https://github.com/p3lab/civic-feedbacks/blob/main/output/Figure_2a.pdf): Ohio network survey (sharing resources measure) in 2013
-* Figure 2b ([Figure_2b.pdf](https://github.com/p3lab/civic-feedbacks/blob/main/output/Figure_2b.pdf): Ohio network survey (sharing resources measure) in 2016
+* Figure 2a ([Figure_2a.pdf](https://github.com/p3lab/civic-feedbacks/blob/main/output/Figure_2a.pdf)): Ohio network survey (sharing resources measure) in 2013
+* Figure 2b ([Figure_2b.pdf](https://github.com/p3lab/civic-feedbacks/blob/main/output/Figure_2b.pdf)): Ohio network survey (sharing resources measure) in 2016
 
