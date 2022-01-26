@@ -1,0 +1,134 @@
+---
+  title: "Civic feedbacks network analysis"
+author: "Liz McKenna"
+output:
+  html_document:
+  number_sections: true
+toc: yes
+pdf_document:
+  toc: yes
+---
+  
+# Import packages 
+library(RCurl) # for reading in raw data from GitHub
+library(igraph) # network analysis
+library(extrafont) # for extra fonts
+library(here) # reproducability
+
+# Import data
+df1 <- read.csv("/Users/lizmckenna/Dropbox/civic-feedbacks-networks/raw_data/2013_sharing_anon.csv", header=TRUE,row.names=1,check.names=FALSE)
+df2 <- read.csv("/Users/lizmckenna/Dropbox/civic-feedbacks-networks/raw_data/2016_sharing_anon.csv", header=TRUE,row.names=1,check.names=FALSE)
+
+# Basic plot of 2013
+m1=as.matrix(df1)
+net1=graph.adjacency(m1,mode="undirected",weighted=NULL,diag=FALSE)
+plot.igraph(net1)
+V(net1)$name
+
+# Basic plot of 2016
+m2=as.matrix(df2)
+net2=graph.adjacency(m2,mode="undirected",weighted=NULL,diag=FALSE)
+plot.igraph(net2)
+V(net2)$name
+
+# Calculate eigenvalues for two points in time
+eigen1 <- eigen_centrality(net1)
+eigen2 <- eigen_centrality(net2)
+
+# Export eigenvalues for analysis archive
+write.csv(eigen1, file = "oh-eigen-resources-2013.csv")
+write.csv(eigen2, file = "oh-eigen-resources-2016.csv")
+
+# Import respondent attributes with eigenvalues appended
+a=read.csv(file="/Users/lizmckenna/Dropbox/civic-feedbacks-networks/raw_data/attributes_anon.csv", header=TRUE,check.names=FALSE)
+
+# Assign color, shape, and size by node name to 2013
+nodecolor=as.character(a$Org[match(V(net1)$name,a$Name)])
+nodeshape=as.character(a$Shape1[match(V(net1)$name,a$Name)])
+nodesize=as.numeric(a$eigen_2013[match(V(net1)$name,a$Name)])*35
+
+# Recode organization palette to black/white/grayscale for printing
+nodecolor=gsub("AMOS","black",nodecolor)
+nodecolor=gsub("CPS","#717D7E",nodecolor)
+nodecolor=gsub("Business/Policy","#FDFEFE",nodecolor)
+nodecolor=gsub("United Way/CPP","#D0D3D4",nodecolor)
+
+# Prepare plot for export as .eps file
+setEPS()
+postscript("/Users/lizmckenna/Dropbox/civic-feedbacks-networks/output/Figure_2a.eps", width = 10, height = 7, fonts=c("Palatino", "Palatino"))
+
+# Plot 2013
+plot.igraph(net1,vertex.label=ifelse(V(net1)$name == "Troy Jackson", V(net1)$name, NA),
+            layout=layout.fruchterman.reingold, 
+            vertex.color=nodecolor,
+            vertex.size=nodesize, 
+            vertex.label.color="black", 
+            vertex.label.family="Palatino",
+            vertex.label.font=1, 
+            vertex.label.cex=1,
+            edge.color="grey", 
+            vertex.label.dist=2.3,
+            edge.curved=TRUE,
+            edge.width=E(net1)$weight^2,
+            vertex.shape=nodeshape)
+
+dev.off()
+
+# Assign color, shape, and size by node name to 2016
+nodecolor=as.character(a$Org[match(V(net2)$name,a$Name)])
+nodeshape=as.character(a$Shape1[match(V(net2)$name,a$Name)])
+nodesize=as.numeric(a$eigen_2016[match(V(net2)$name,a$Name)])*35
+
+# Recode organization palette to black/white/grayscale for printing
+nodecolor=gsub("AMOS","black",nodecolor)
+nodecolor=gsub("CPS","#717D7E",nodecolor)
+nodecolor=gsub("Business/Policy","#FDFEFE",nodecolor)
+nodecolor=gsub("United Way/CPP","#D0D3D4",nodecolor)
+
+
+# Prepare plot for export as .eps file
+setEPS()
+postscript("/Users/lizmckenna/Dropbox/civic-feedbacks-networks/output/Figure_2c.eps", width = 10, height = 7, fonts=c("Palatino", "Palatino"))
+
+
+# Plot 2016
+plot.igraph(net2,
+            layout=layout.fruchterman.reingold, 
+            vertex.label=ifelse(V(net2)$name == "Troy Jackson", V(net2)$name, NA),
+            vertex.color=nodecolor,
+            vertex.size=nodesize, 
+            vertex.label.color="black", 
+            vertex.label.family="Palatino",
+            vertex.label.font=1, 
+            vertex.label.cex=1,
+            edge.color="grey", 
+            vertex.label.dist=0,
+            edge.curved=TRUE,
+            edge.width=E(net1)$weight^2,
+            vertex.shape=nodeshape)
+
+dev.off()
+
+
+# Add a legend
+op <- par(family = "Palatino")
+
+# Create a color vector
+colrs <- c("#FDFEFE","#17202A","#D0D3D4", "#717D7E")
+
+# Assign and create legend
+V(net2)$Name <- colrs[V(net2)$Org]
+
+
+legend(x=-3, y=-.1, 
+       c("CPS", "Business/Policy","AMOS", "United Way/CPP"), 
+       pch=c(21,22), 
+       pt.bg=colrs, 
+       pt.cex=3, 
+       cex=1.4, 
+       bty="n", 
+       ncol=1)
+
+## Export to dropbox
+dev.copy(png,'/Users/lizmckenna/Dropbox/civic-feedbacks-networks/legend.png', height =5, width =8, units = 'in', res=400)
+dev.off()
