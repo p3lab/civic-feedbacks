@@ -20,9 +20,11 @@ Dataset: [link TK from editorial team]
 * [2016_sharing_anon.csv](https://raw.githubusercontent.com/p3lab/civic-feedbacks/main/raw_data/2016_sharing_anon.csv)
 * [attributes_anon.csv](https://raw.githubusercontent.com/p3lab/civic-feedbacks/main/raw_data/attributes_anon.csv)
 
-4. Replication code: [data_analysis.Rmd](https://github.com/jaeyk/linked_fate_review/blob/master/code/data_analysis.Rmd)
+4. Replication code: [data-analysis.Rmd](https://github.com/p3lab/civic-feedbacks/blob/main/code/data-analysis.Rmd)
 
 5. Output files 
-* Figure 1 ([figure1.png](https://github.com/jaeyk/linked_fate_review/raw/master/output/figure1.png)): publication trend on linked fate 
-* Figure 2 ([figure2.png](https://github.com/jaeyk/linked_fate_review/raw/master/output/figure2.png)): a schematic causal diagram on black utility heuristic theory 
+* Figure 1 ([Figure_1.pdf](https://github.com/p3lab/civic-feedbacks/blob/main/output/Figure_1.pdf)): relatoinships between participation, organizational strategy, and policy
+ 
+* Figure 2a ([Figure_2a.pdf](https://github.com/p3lab/civic-feedbacks/blob/main/output/Figure_2a.pdf): Ohio network survey (sharing resources measure) in 2013
+* Figure 2b ([Figure_2b.pdf](https://github.com/p3lab/civic-feedbacks/blob/main/output/Figure_2b.pdf): Ohio network survey (sharing resources measure) in 2016
 
