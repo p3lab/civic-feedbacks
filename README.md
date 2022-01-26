@@ -15,7 +15,10 @@ Dataset: [link TK from editorial team]
 * Platform: macOS 
 * Running under: Catalina version 10.15.7
 
-3. Raw data: [linked_fate_review.csv](https://github.com/jaeyk/linked_fate_review/blob/master/raw_data/linked_fate_review.csv)
+3. Raw data:
+* [2013_sharing_anon.csv](https://raw.githubusercontent.com/p3lab/civic-feedbacks/main/raw_data/2013_sharing_anon.csv)
+* [2016_sharing_anon.csv](https://raw.githubusercontent.com/p3lab/civic-feedbacks/main/raw_data/2016_sharing_anon.csv)
+* [attributes_anon.csv](https://raw.githubusercontent.com/p3lab/civic-feedbacks/main/raw_data/attributes_anon.csv)
 
 4. Replication code: [data_analysis.Rmd](https://github.com/jaeyk/linked_fate_review/blob/master/code/data_analysis.Rmd)
 
